@@ -2,15 +2,35 @@
 
 ## Descripción del Proyecto
 
-...
+Esta es la simulacion de una maquina de cafe inteligente, usando Arduino a la vez que sensores y actuadores. Su construccion es relativamente sencilla si se siguen las indicaciones de este post.
 
-![Imagen principal del proyecto](https://github.com/madmatq/arduinoCoffeeMachine.git/blob/main/media/IMG_3943.JPG)
+Se trata de una maquina con una interfaz de usuario muy intuitiva (user-friendly).
+Desde el inicio el usuario recibira feedback constante del estado del programa que se mostrara en el display LCD incluido.
+
+La luz del led rojo parpadeara 3 veces durante el arranque con intervalos de 1 segundo, mientras que en la pantalla LCD se mostrara el mensaje: "Cargando...".
+Despues de esto el led se apagara y en la pantalla se mostrara el servicio de "Esperando cliente...".
+Si detecta una persona delante de la maquina (a menos de 1m), la maquina pasara al segundo estado de servicio. Mostrara la informacion de temperatura ambiente y humedad durante 5 segundos, para despues listar los productos que contiene.
+El usuario podra interactuar con esta lista haciendo uso del joystick incorporado(arriba/abajo). Para seleccionar el producto deseado, es tan sencillo como hacer click en el joystick.
+Tras haber elegido un producto, el programa pasara al estado de preparacion de bebidas, durante el cual se mostrara un mensaje en la pantalla LCD: "Preparando Cafe..." por un tiempo aleatorio entre 4-8 segundos.
+Al mismo tiempo el led secunadario verde se encendera de manera incremental, aumentando su intensidad en proporcion al tiempo de preparacion.
+Tras esto la pantalla LCD mostrara el mensaje de: "Retirar bebida..." durante 3 segundos y volvera a la funcionalidad inicial del servicio (estado Servicio Activo).
+
+En cualquier momento dentro de este estado el usuario podra resetearlo y volver al mensaje inicial de la temperatura y humedad haciendo uso del boton incorporado. Este se debe pulsar en un rango de 2-3 segundos.
+
+Para acceder al modo admin usamos el mismo boton incorporado. Este se debe pulsar durante mas de 5 segundos para acceder al menu interactivo de administrador de la maquina.
+En dicho menu observaremos una lista de nuevas funcionalidades que se mostraran en la pantalla LCD, al mismo tiempo que los dos leds incorporados se encenderan.
+Para navegar por dicha lista usaremos el joystick de nuevo(arriba/abajo), permitiendo seleccionar la funcionalidad con el click y volver al menu(izquierda).
+
+Para salir del modo Admin volveremos a pulsar el boton durante al menos 5 segundos.
+
+
+![Imagen principal del proyecto](media/image2.JPG)
 
 ---
 
 ## Características Principales
 
-### 🔧 Hardware Utilizado
+### Hardware Utilizado
 - **Microcontrolador**: Arduino Elegoo UNO R3
 - **Pantalla**: LCD 16x2
 - **Sensores**:
@@ -21,9 +41,9 @@
   - Botón adicional para funciones especiales
 - **Indicadores**: 2 LEDs (estado y progreso)
 
-![Esquema de conexiones](url_esquema_conexiones)
+![Esquema de conexiones](media/arduinoCoffeeMachine_bb.jpg)
 
-### ⚡ Funcionalidades del Sistema
+### Funcionalidades del Sistema
 
 #### Sistema de Estados Inteligente
 - **Arranque**: Secuencia de inicialización con parpadeo de LEDs
@@ -53,8 +73,6 @@
 - **Presión media (2-3s)**: Reiniciar servicio
 - **Presión larga (5s+)**: Entrar/Salir modo administrador
 
-![GIF de navegación](url_gif_navegacion)
-
 ---
 
 ## Modo Administrador
@@ -68,8 +86,6 @@ El modo administrador permite acceso a:
 ### Configuración del Sistema
 - **Contador de tiempo**: Tiempo de funcionamiento desde el arranque
 - **Modificación de precios**: Ajuste dinámico de precios de productos
-
-![Captura del modo admin](url_captura_admin)
 
 ---
 
@@ -142,8 +158,6 @@ El código utiliza la librería `Thread` para gestionar múltiples tareas concur
    - Secuencia de parpadeo de LEDs
    - Calibración de sensores
 
-![Secuencia de arranque](url_imagen_arranque)
-
 2. **Detección de Cliente**
    - El sensor ultrasónico detecta presencia (< 100cm)
    - Activación automática del servicio
@@ -158,8 +172,6 @@ El código utiliza la librería `Thread` para gestionar múltiples tareas concur
    - Tiempo aleatorio de preparación (4-8 segundos)
    - Indicador LED con fade progresivo
    - Mensaje de "Retire bebida" al finalizar
-
-![Proceso de preparación](url_imagen_preparacion)
 
 ---
 
@@ -190,10 +202,12 @@ Producto productos[5] = {
 
 ## Referencias
 
--[URJC-AulaVirtual-Sistemas Empotrados y de tiempo real-2025-Practica 3-pdf]((https://github.com/madmatq/arduinoCoffeeMachine.git/blob/main/docs/Practica3.pdf))
+-[URJC-AulaVirtual-Sistemas Empotrados y de tiempo real-2025-Practica 3-pdf](docs/Practica3.pdf)
+
 -[Awesome README](https://github.com/matiassingers/awesome-readme)
+
 -[Fritzing](https://fritzing.org)
 
 ---
 
-*Desarrollado por @mtsj*
+*Desarrollado por @mtsj (Matias J. Mercado)*
